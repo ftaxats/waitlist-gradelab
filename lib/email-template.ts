@@ -49,6 +49,22 @@ export function generateWelcomeEmail(email: string) {
           border-left: 4px solid #84cc16;
           margin: 20px 0;
         }
+        .benefits {
+          background: #f8f9fa;
+          padding: 20px;
+          border-radius: 8px;
+          margin: 20px 0;
+        }
+        .benefit-item {
+          display: flex;
+          align-items: center;
+          margin: 10px 0;
+        }
+        .benefit-icon {
+          color: #84cc16;
+          margin-right: 10px;
+          font-weight: bold;
+        }
       </style>
     </head>
     <body>
@@ -58,40 +74,41 @@ export function generateWelcomeEmail(email: string) {
       </div>
       
       <div class="content">
-        <h2>Hi there!</h2>
+        <h2>Thank you for joining the waitlist for GradeLab! 🎉</h2>
         
-        <p>Thank you for joining the GradeLab waitlist! We're excited to have you on board.</p>
+        <p>We're excited to have you onboard as we build the next generation of smart AI-powered assessments.</p>
         
-        <div class="highlight">
-          <strong>What's GradeLab?</strong><br>
-          GradeLab is an AI-powered educational assessment platform that helps teachers:
-          <ul>
-            <li>Grade handwritten exams in seconds with 98% accuracy</li>
-            <li>Generate diverse questions using Bloom's taxonomy</li>
-            <li>Create custom rubrics for consistent evaluation</li>
-            <li>Track student performance with detailed analytics</li>
-          </ul>
+        <div class="benefits">
+          <h3>As a waitlist member, you'll be among the first to:</h3>
+          <div class="benefit-item">
+            <span class="benefit-icon">✅</span>
+            <span>Get early access before public launch</span>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">✅</span>
+            <span>Share feedback that directly shapes the product</span>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon">✅</span>
+            <span>Unlock 24x7 priority support and exclusive updates</span>
+          </div>
         </div>
         
-        <p><strong>What happens next?</strong></p>
-        <ul>
-          <li>We'll notify you as soon as GradeLab launches</li>
-          <li>You'll get early access to our beta version</li>
-          <li>Exclusive discounts for waitlist members</li>
-          <li>Priority support when you join</li>
-        </ul>
+        <p>To help you understand how GradeLab can work for your needs, we'd love to connect with you directly.</p>
+        
+        <p>You can book a quick 30-minute meeting with our team here:</p>
         
         <div style="text-align: center;">
-          <a href="https://cal.com/teamgradelab/15min" class="button">
-            📅 Book a Demo
+          <a href="https://cal.com/teamgradelab/30min" class="button">
+            👉 Book a Meeting
           </a>
         </div>
         
-        <p>Want to see GradeLab in action? Book a 15-minute demo and we'll show you how it can transform your grading workflow.</p>
+        <p>We can't wait to show you what we've been building.</p>
         
-        <p>Stay tuned for updates!</p>
+        <p>Thanks again for being an early supporter — you're part of shaping the future of assessments.</p>
         
-        <p>Best regards,<br>
+        <p>Best,<br>
         The GradeLab Team</p>
       </div>
       
@@ -104,33 +121,28 @@ export function generateWelcomeEmail(email: string) {
   `;
 
   const textContent = `
-Welcome to GradeLab!
+Thank you for joining the waitlist for GradeLab! 🎉
 
-Hi there!
+We're excited to have you onboard as we build the next generation of smart AI-powered assessments.
 
-Thank you for joining the GradeLab waitlist! We're excited to have you on board.
+As a waitlist member, you'll be among the first to:
+✅ Get early access before public launch
+✅ Share feedback that directly shapes the product
+✅ Unlock 24x7 priority support and exclusive updates
 
-What's GradeLab?
-GradeLab is an AI-powered educational assessment platform that helps teachers:
-- Grade handwritten exams in seconds with 98% accuracy
-- Generate diverse questions using Bloom's taxonomy
-- Create custom rubrics for consistent evaluation
-- Track student performance with detailed analytics
+To help you understand how GradeLab can work for your needs, we'd love to connect with you directly.
 
-What happens next?
-- We'll notify you as soon as GradeLab launches
-- You'll get early access to our beta version
-- Exclusive discounts for waitlist members
-- Priority support when you join
+You can book a quick 30-minute meeting with our team here:
+👉 Book a Meeting: https://cal.com/teamgradelab/30min
 
-Want to see GradeLab in action? Book a demo: https://cal.com/teamgradelab/15min
+We can't wait to show you what we've been building.
 
-Stay tuned for updates!
+Thanks again for being an early supporter — you're part of shaping the future of assessments.
 
-Best regards,
+Best,
 The GradeLab Team
 
-© 2024 GradeLab. All rights reserved.
+© 2025 GradeLab. All rights reserved.
   `;
 
   return {
