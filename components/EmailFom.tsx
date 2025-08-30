@@ -69,7 +69,7 @@ export default function EmailForm() {
   return (
     <div className="flex flex-col items-center">
       <form onSubmit={handleSubmit} method="POST" className="mt-2 max-w-md w-full">
-        <div className="flex flex-col gap-2 lg:flex-row">
+        <div className="flex flex-col gap-2 lg:flex-row lg:justify-center">
           <label className="sr-only" htmlFor="email-address">
             Email address
           </label>
@@ -84,16 +84,26 @@ export default function EmailForm() {
             value={email}
             onChange={handleEmailChange}
           />
-          <button
-            className="flex h-12 shrink-0 items-center justify-center gap-1 rounded-lg bg-[#000F2D] px-6 py-2 text-sm font-semibold text-white transition-all hover:bg-zinc-700"
-            type="submit"
-          >
-            <span>Join the Waitlist Free</span>
-          </button>
+          <div className="flex gap-2 justify-center">
+            <button
+              className="flex h-12 shrink-0 items-center justify-center gap-1 rounded-lg bg-[#000F2D] px-4 py-2 text-xs font-semibold text-white transition-all hover:bg-zinc-700"
+              type="submit"
+            >
+              <span>Join Waitlist</span>
+            </button>
+            <a
+              href="https://cal.com/teamgradelab/15min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-12 shrink-0 items-center justify-center gap-1 rounded-lg bg-[#84cc16] px-4 py-2 text-xs font-semibold text-white transition-all hover:bg-[#65a30d]"
+            >
+              <span>Book Demo</span>
+            </a>
+          </div>
         </div>
       </form>
 
-      <div className="flex items-center gap-2 text-gray-500 mt-3 w-full justify-start">
+      <div className="flex items-center gap-2 text-gray-500 mt-3 justify-center">
         <LockClosedIcon className="w-3 h-3" />
         <p className="text-xs">
           Your email is secured
