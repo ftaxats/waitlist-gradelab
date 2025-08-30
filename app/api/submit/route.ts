@@ -1,32 +1,48 @@
+import { supabase } from '@/lib/supabase'
+
 export async function POST(request: Request) {
   const { email } = await request.json();
 
-  try {
-    const response = await fetch(
-      `https://emailoctopus.com/api/1.6/lists/${process.env.LIST_ID}/contacts`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          api_key: `${process.env.EMAILOCTOPUS_KEY}`,
-          email_address: email,
-        }),
-      }
-    );
+  if (!email) {
+    return new Response("Email is required", { status: 400 });
+  }
 
-    if (response.status === 200) {
-      return new Response("Email submitted successfully!", {
-        status: 200,
-      });
-    } else {
+  try {
+    // Check if email already exists
+    const { data: existingEmail } = await supabase
+      .from('waitlist')
+      .select('email')
+      .eq('email', email)
+      .single();
+
+    if (existingEmail) {
+      return new Response("Email already exists", { status: 409 });
+    }
+
+    // Insert new email
+    const { data, error } = await supabase
+      .from('waitlist')
+      .insert([
+        { 
+          email: email,
+          created_at: new Date().toISOString()
+        }
+      ])
+      .select()
+
+    if (error) {
+      console.error('Supabase error:', error);
       return new Response("Failed to submit email!", {
-        status: response.status,
-        statusText: response.statusText,
+        status: 500,
+        statusText: error.message,
       });
     }
+
+    return new Response("Email submitted successfully!", {
+      status: 200,
+    });
   } catch (error) {
+    console.error('Server error:', error);
     return new Response("Internal server error", { status: 500 });
   }
 }
