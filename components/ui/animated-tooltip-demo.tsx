@@ -52,7 +52,7 @@ function AnimatedTooltipPreview() {
   return (
     <div className="flex flex-col items-center w-full">
       <AnimatedTooltip items={people} />
-      <p className="text-xs text-gray-500 mt-2 text-center">1000+ Teachers are already using Gradelab</p>
+      <p className="text-xs text-gray-500 mt-2 text-center">500+ Teachers are already using Gradelab</p>
     </div>
   );
 }
