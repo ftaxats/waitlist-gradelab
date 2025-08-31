@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase'
+import { supabaseServer } from '@/lib/supabase-server'
 import { generateWelcomeEmail } from '@/lib/email-template'
 
 export async function POST(request: Request) {
@@ -39,34 +40,32 @@ export async function POST(request: Request) {
       });
     }
 
-    // Send welcome email using Supabase Edge Function
+    // Store email for processing (Supabase will handle sending via database trigger)
     try {
       const emailContent = generateWelcomeEmail(email);
       
-      const response = await fetch('https://ujismntthfzfkrzgedit.supabase.co/functions/v1/send-welcome-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
-        },
-        body: JSON.stringify({
-          to: email,
-          subject: '🎉 Welcome to GradeLab! You\'re on our waitlist',
-          html: emailContent.html,
-          text: emailContent.text,
-          from: 'noreply@gradelab.io',
-        }),
-      });
+      // Insert email into database for Supabase to process
+      const { error: emailError } = await supabaseServer
+        .from('emails')
+        .insert([
+          {
+            to_email: email,
+            subject: '🎉 Welcome to GradeLab! You\'re on our waitlist',
+            html_content: emailContent.html,
+            text_content: emailContent.text,
+            from_email: 'noreply@gradelab.io',
+            status: 'pending'
+          }
+        ]);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Email error:', errorData);
+      if (emailError) {
+        console.error('Email storage error:', emailError);
         // Don't fail the request if email fails, just log it
       } else {
-        console.log('Welcome email sent to:', email);
+        console.log('Welcome email queued for:', email);
       }
     } catch (emailError) {
-      console.error('Email sending failed:', emailError);
+      console.error('Email processing failed:', emailError);
       // Don't fail the request if email fails, just log it
     }
 
